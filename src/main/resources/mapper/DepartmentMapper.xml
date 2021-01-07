@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longruan.demo1.dao.DepartmentDao">
+    <insert id="Inert" parameterType="com.longruan.demo1.entity.Department">
+        insert into platform.department (id,name) values(#{id},#{name})
+    </insert>
+    <update id="Update" parameterType="com.longruan.demo1.entity.Department">
+        update platform.department set name=#{id} where id=#{name}
+    </update>
+    <delete id="Delete" parameterType="java.lang.Integer">
+        delete from platform.department where id=#{id}
+    </delete>
+    <select id="SelectOne" resultMap="resultMapBase" parameterType="java.lang.Integer">
+        select <include refid="departmentBase"></include> from platform.department where id=#{id}
+    </select>
+    <select id="SelectAll" resultMap="resultMapBase">
+        select <include refid="departmentBase"></include> from platform.department
+    </select>
+
+    <sql id="departmentBase">
+        id,name
+    </sql>
+
+    <resultMap id="resultMapBase" type="com.longruan.demo1.entity.Department">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"/>
+    </resultMap>
+</mapper>
